@@ -68,7 +68,30 @@ curl -X GET http://localhost:1337/people/SILtWkM4MQK1n32R
   ]
 }
 ```
-
+**Request** - getting specific set of individuals by thier ids.
+```
+curl -X GET 'http://localhost:1337/people?ids=hXuwSO3Q9qTzerjp,qjeSCuNLhdEM7RXZ'
+```
+**Reply**
+```
+{
+  "people": [
+    {
+      "id": "hXuwSO3Q9qTzerjp",
+      "name": "Laxman"
+    },
+    {
+      "id": "qjeSCuNLhdEM7RXZ",
+      "name": "Raju",
+      "links": {
+        "pets": [
+          "T0ozuiz15oGmtD90"
+        ]
+      }
+    }
+  ]
+}
+```
 **Request** - getting all pets of an individual person by its id.
 ```
 curl -X GET http://localhost:1337/people/qjeSCuNLhdEM7RXZ/pets
