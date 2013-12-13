@@ -29,6 +29,13 @@ var fortune = require('fortune')
   .listen(1337);
 ```
 
+Starting the server
+-------------------
+
+```
+node app.js
+```
+
 API
 ---
 
