@@ -52,7 +52,7 @@ curl -X GET http://localhost:1337/people
 ```
 
 **Reply**
-```
+```js
 {
   "people": [
     {
@@ -67,7 +67,7 @@ curl -X GET http://localhost:1337/people
 curl -X GET http://localhost:1337/people/SILtWkM4MQK1n32R
 ```
 **Reply**
-```
+```js
 {
   "people": [
     {
@@ -82,7 +82,7 @@ curl -X GET http://localhost:1337/people/SILtWkM4MQK1n32R
 curl -X GET 'http://localhost:1337/people?ids=hXuwSO3Q9qTzerjp,qjeSCuNLhdEM7RXZ'
 ```
 **Reply**
-```
+```js
 {
   "people": [
     {
@@ -107,7 +107,7 @@ curl -X GET http://localhost:1337/people/qjeSCuNLhdEM7RXZ/pets
 ```
 
 **Reply**
-```
+```js
 {
   "pets": [
     {
@@ -128,7 +128,7 @@ curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"
 
 **Reply**
 
-```
+```js
 {
   "people": [
     {
@@ -157,7 +157,7 @@ curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"
 curl -X PUT -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"Ramanujan"}]}' http://localhost:1337/people/SILtWkM4MQK1n32R
 ```
 **Reply**
-```
+```js
 {
   "people": [
     {
@@ -244,7 +244,7 @@ curl -I -X DELETE http://localhost:1337/people/SILtWkM4MQK1n32R
 ```
 
 **Reply**
-```
+```js
 HTTP/1.1 204 No Content
 Date: Fri, 13 Dec 2013 14:50:23 GMT
 Connection: keep-alive
@@ -261,7 +261,7 @@ curl -X GET http://localhost:1337/pets
 ```
 
 **Reply**
-```
+```js
 {
   "pets": [
     {
@@ -278,7 +278,7 @@ curl -X GET http://localhost:1337/pets/T0ozuiz15oGmtD90
 ```
 
 **Reply**
-```
+```js
 {
   "pets": [
     {
@@ -297,7 +297,7 @@ curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"pets":[{"name":"Sh
 
 **Reply**
 
-```
+```js
 {
   "pets": [
     {
@@ -315,7 +315,7 @@ curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"pets":[{"name":"Sh
 curl -X PUT -H "Content-Type:application/vnd.api+json" -d '{"pets":[{"name":"Sherdil"}]}' http://localhost:1337/pets/T0ozuiz15oGmtD90
 ```
 **Reply**
-```
+```js
 {
   "pets": [
     {
@@ -402,7 +402,7 @@ curl -I -X DELETE http://localhost:1337/people/SILtWkM4MQK1n32R
 ```
 
 **Reply**
-```
+```js
 HTTP/1.1 204 No Content
 Date: Fri, 13 Dec 2013 14:50:23 GMT
 Connection: keep-alive
