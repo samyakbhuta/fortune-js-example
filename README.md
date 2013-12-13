@@ -87,6 +87,17 @@ curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"
 }
 ```
 
+Some other request you can try.
+
+```
+curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"Raju","Age":20}]}' http://localhost:1337/people
+```
+
+```
+curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"Raju","Age":20,"pets":["T0ozuiz15oGmtD90"]}]}' http://localhost:1337/people
+```
+
+
 #### PUT
 
 **Request**
