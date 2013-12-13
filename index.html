@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Fortune.js Example by samyakbhuta</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Fortune.js Example</h1>
+          <h2>Furtune.js Example</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/samyakbhuta/fortune-js-example/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/samyakbhuta/fortune-js-example/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/samyakbhuta/fortune-js-example" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h2>
+<a name="furtunejs-example" class="anchor" href="#furtunejs-example"><span class="octicon octicon-link"></span></a><a href="https://github.com/daliwali/fortune">Furtune.js</a> Example</h2>
+
+<h3>
+<a name="resources" class="anchor" href="#resources"><span class="octicon octicon-link"></span></a>Resources</h3>
+
+<ul>
+<li><code>Person</code></li>
+<li><code>Pet</code></li>
+</ul><h3>
+<a name="relationships" class="anchor" href="#relationships"><span class="octicon octicon-link"></span></a>Relationships</h3>
+
+<ul>
+<li>A <code>Person</code> can have 0 or more <code>Pet</code>
+</li>
+</ul><h2>
+<a name="code" class="anchor" href="#code"><span class="octicon octicon-link"></span></a>Code</h2>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">fortune</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fortune'</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">fortune</span><span class="p">({</span>
+    <span class="nx">db</span><span class="o">:</span> <span class="s1">'petstore'</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">resource</span><span class="p">(</span><span class="s1">'person'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="nx">age</span><span class="o">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="nx">pets</span><span class="o">:</span> <span class="p">[</span><span class="s1">'pet'</span><span class="p">]</span> <span class="c1">// "has many" relationship to pets</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">resource</span><span class="p">(</span><span class="s1">'pet'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="nx">age</span><span class="o">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="nx">owner</span><span class="o">:</span> <span class="s1">'person'</span> <span class="c1">// "belongs to" relationship to a person</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">1337</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="starting-the-server" class="anchor" href="#starting-the-server"><span class="octicon octicon-link"></span></a>Starting the server</h2>
+
+<pre><code>node app.js
+</code></pre>
+
+<h2>
+<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
+
+<h3>
+<a name="person" class="anchor" href="#person"><span class="octicon octicon-link"></span></a><code>Person</code>
+</h3>
+
+<hr><p>NOTE : <code>Person</code> becomes <code>people</code> in its plural form. <a href="https://github.com/daliwali/fortune/blob/master/lib/route.js#L38">Fortune.js does it on it's own</a>. If we had a resource called <code>Child</code>, collection would have been refered as <code>children</code>.</p>
+
+<h4>
+<a name="get" class="anchor" href="#get"><span class="octicon octicon-link"></span></a>GET</h4>
+
+<p><strong>Request</strong> - getting them all.</p>
+
+<pre><code>curl -X GET http://localhost:1337/people
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"people"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"SILtWkM4MQK1n32R"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Ram"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><strong>Request</strong> - getting an individual person by its id.</p>
+
+<pre><code>curl -X GET http://localhost:1337/people/SILtWkM4MQK1n32R
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"people"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"SILtWkM4MQK1n32R"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Ram"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><strong>Request</strong> - getting specific set of individuals by thier ids.</p>
+
+<pre><code>curl -X GET 'http://localhost:1337/people?ids=hXuwSO3Q9qTzerjp,qjeSCuNLhdEM7RXZ'
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"people"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"hXuwSO3Q9qTzerjp"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Laxman"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"qjeSCuNLhdEM7RXZ"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Raju"</span><span class="p">,</span>
+      <span class="s2">"links"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"pets"</span><span class="o">:</span> <span class="p">[</span>
+          <span class="s2">"T0ozuiz15oGmtD90"</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><strong>Request</strong> - getting all pets of an individual person by its id.</p>
+
+<pre><code>curl -X GET http://localhost:1337/people/qjeSCuNLhdEM7RXZ/pets
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"pets"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"T0ozuiz15oGmtD90"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Sherdil"</span><span class="p">,</span>
+      <span class="s2">"links"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"owner"</span><span class="o">:</span> <span class="s2">"qjeSCuNLhdEM7RXZ"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="post" class="anchor" href="#post"><span class="octicon octicon-link"></span></a>POST</h4>
+
+<p><strong>Request</strong></p>
+
+<pre><code>curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"Ram"}]}' http://localhost:1337/people
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"people"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"SILtWkM4MQK1n32R"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Ram"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Some other request you can try.</p>
+
+<pre><code>curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"Raju","Age":20}]}' http://localhost:1337/people
+</code></pre>
+
+<pre><code>curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"Raju","Age":20,"pets":["T0ozuiz15oGmtD90"]}]}' http://localhost:1337/people
+</code></pre>
+
+<h4>
+<a name="put" class="anchor" href="#put"><span class="octicon octicon-link"></span></a>PUT</h4>
+
+<p><strong>Request</strong></p>
+
+<pre><code>curl -X PUT -H "Content-Type:application/vnd.api+json" -d '{"people":[{"name":"Ramanujan"}]}' http://localhost:1337/people/SILtWkM4MQK1n32R
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"people"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"SILtWkM4MQK1n32R"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Ramanujan"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<h5>
+<a name="patch" class="anchor" href="#patch"><span class="octicon octicon-link"></span></a><a href="http://tools.ietf.org/html/rfc6902">PATCH</a>
+</h5>
+
+<h6>
+<a name="add" class="anchor" href="#add"><span class="octicon octicon-link"></span></a>add</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="remove" class="anchor" href="#remove"><span class="octicon octicon-link"></span></a>remove</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="replace" class="anchor" href="#replace"><span class="octicon octicon-link"></span></a>replace</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="move" class="anchor" href="#move"><span class="octicon octicon-link"></span></a>move</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="copy" class="anchor" href="#copy"><span class="octicon octicon-link"></span></a>copy</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="test" class="anchor" href="#test"><span class="octicon octicon-link"></span></a>test</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h5>
+<a name="delete" class="anchor" href="#delete"><span class="octicon octicon-link"></span></a>DELETE</h5>
+
+<p><strong>Request</strong></p>
+
+<pre><code>curl -I -X DELETE http://localhost:1337/people/SILtWkM4MQK1n32R
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">204</span> <span class="nx">No</span> <span class="nx">Content</span>
+<span class="nb">Date</span><span class="o">:</span> <span class="nx">Fri</span><span class="p">,</span> <span class="mi">13</span> <span class="nx">Dec</span> <span class="mi">2013</span> <span class="mi">14</span><span class="o">:</span><span class="mi">50</span><span class="o">:</span><span class="mi">23</span> <span class="nx">GMT</span>
+<span class="nx">Connection</span><span class="o">:</span> <span class="nx">keep</span><span class="o">-</span><span class="nx">alive</span>
+</pre></div>
+
+<h3>
+<a name="pet" class="anchor" href="#pet"><span class="octicon octicon-link"></span></a><code>Pet</code>
+</h3>
+
+<hr><h4>
+<a name="get-1" class="anchor" href="#get-1"><span class="octicon octicon-link"></span></a>GET</h4>
+
+<p><strong>Request</strong> - getting them all.</p>
+
+<pre><code>curl -X GET http://localhost:1337/pets
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"pets"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"T0ozuiz15oGmtD90"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Sherdil"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><strong>Request</strong> - getting an individual pet by its id.</p>
+
+<pre><code>curl -X GET http://localhost:1337/pets/T0ozuiz15oGmtD90
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"pets"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"T0ozuiz15oGmtD90"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Sherdil"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="post-1" class="anchor" href="#post-1"><span class="octicon octicon-link"></span></a>POST</h4>
+
+<p><strong>Request</strong></p>
+
+<pre><code>curl -X POST -H "Content-Type:application/vnd.api+json" -d '{"pets":[{"name":"Sheru"}]}' http://localhost:1337/pets
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"pets"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"T0ozuiz15oGmtD90"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Sheru"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="put-1" class="anchor" href="#put-1"><span class="octicon octicon-link"></span></a>PUT</h4>
+
+<p><strong>Request</strong></p>
+
+<pre><code>curl -X PUT -H "Content-Type:application/vnd.api+json" -d '{"pets":[{"name":"Sherdil"}]}' http://localhost:1337/pets/T0ozuiz15oGmtD90
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+  <span class="s2">"pets"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"T0ozuiz15oGmtD90"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Sherdil"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<h5>
+<a name="patch-1" class="anchor" href="#patch-1"><span class="octicon octicon-link"></span></a><a href="http://tools.ietf.org/html/rfc6902">PATCH</a>
+</h5>
+
+<h6>
+<a name="add-1" class="anchor" href="#add-1"><span class="octicon octicon-link"></span></a>add</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="remove-1" class="anchor" href="#remove-1"><span class="octicon octicon-link"></span></a>remove</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="replace-1" class="anchor" href="#replace-1"><span class="octicon octicon-link"></span></a>replace</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="move-1" class="anchor" href="#move-1"><span class="octicon octicon-link"></span></a>move</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="copy-1" class="anchor" href="#copy-1"><span class="octicon octicon-link"></span></a>copy</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h6>
+<a name="test-1" class="anchor" href="#test-1"><span class="octicon octicon-link"></span></a>test</h6>
+
+<p><strong>Request</strong></p>
+
+<pre><code>
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<pre><code>
+</code></pre>
+
+<h5>
+<a name="delete-1" class="anchor" href="#delete-1"><span class="octicon octicon-link"></span></a>DELETE</h5>
+
+<p><strong>Request</strong></p>
+
+<pre><code>curl -I -X DELETE http://localhost:1337/people/SILtWkM4MQK1n32R
+</code></pre>
+
+<p><strong>Reply</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">204</span> <span class="nx">No</span> <span class="nx">Content</span>
+<span class="nb">Date</span><span class="o">:</span> <span class="nx">Fri</span><span class="p">,</span> <span class="mi">13</span> <span class="nx">Dec</span> <span class="mi">2013</span> <span class="mi">14</span><span class="o">:</span><span class="mi">50</span><span class="o">:</span><span class="mi">23</span> <span class="nx">GMT</span>
+<span class="nx">Connection</span><span class="o">:</span> <span class="nx">keep</span><span class="o">-</span><span class="nx">alive</span>
+</pre></div>
+        </section>
+
+        <footer>
+          Fortune.js Example is maintained by <a href="https://github.com/samyakbhuta">samyakbhuta</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
