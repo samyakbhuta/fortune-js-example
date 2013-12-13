@@ -41,6 +41,8 @@ API
 
 ### ```Person```
 
+---
+
 NOTE : ```Person``` becomes ```people``` in its plural form. [Fortune.js does it on it's own](https://github.com/daliwali/fortune/blob/master/lib/route.js#L38). If we had a resource called ```Child```, collection would have been refered as ```children```.
 
 #### GET
@@ -249,6 +251,8 @@ Connection: keep-alive
 ```
 
 ### ```Pet```
+
+---
 
 #### GET
 **Request** - getting them all.
