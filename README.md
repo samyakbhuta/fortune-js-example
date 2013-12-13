@@ -68,6 +68,26 @@ curl -X GET http://localhost:1337/people/SILtWkM4MQK1n32R
   ]
 }
 ```
+
+**Request** - getting all pets of an individual person by its id.
+```
+curl -X GET http://localhost:1337/people/qjeSCuNLhdEM7RXZ/pets
+```
+
+**Reply**
+```
+{
+  "pets": [
+    {
+      "id": "T0ozuiz15oGmtD90",
+      "name": "Sherdil",
+      "links": {
+        "owner": "qjeSCuNLhdEM7RXZ"
+      }
+    }
+  ]
+}
+```
 #### POST
 **Request**
 ```
